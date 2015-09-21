@@ -15,6 +15,21 @@ function isValidComputedProperty() {
   return propertyErrors == null || propertyErrors.length === 0;
 }
 
+function errorMessages() {
+  const errorsPath = this.get('errorsPath');
+  const propertyErrors = this.get(errorsPath);
+
+  let errorMessages = [];
+
+  if (propertyErrors != null) {
+    errorMessages = propertyErrors.map(function (error) {
+      return error.message;
+    });
+  }
+
+  return errorMessages.join();
+}
+
 export default Ember.Component.extend({
   classNames: 'form-field',
   classNameBindings: [
@@ -53,6 +68,7 @@ export default Ember.Component.extend({
     const changedPath  = originPath || propertyPath;
 
     defineProperty(this, 'isValid', computed(errorsPath, isValidComputedProperty));
+    defineProperty(this, 'errorMessages', computed(errorsPath, errorMessages));
     defineProperty(this, 'isChanged', reads(`object.${changedPath}IsChanged`));
     defineProperty(this, 'isDifferent', reads(`object.${propertyPath}IsDifferent`));
   },
