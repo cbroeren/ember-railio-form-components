@@ -1,3 +1,10 @@
 .form-field {
   display: inline;
+
+  &--disabled {
+    .fa {
+      color: lightgrey;
+      cursor: default;
+    }
+  }
 }

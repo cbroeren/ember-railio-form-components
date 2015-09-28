@@ -18,6 +18,7 @@ function isValidComputedProperty() {
 export default Ember.Component.extend({
   classNames: 'form-field',
   classNameBindings: [
+    'disabled:form-field--disabled',
     'isValid::form-field--invalid',
     'isChanged:form-field--changed',
     'isDifferent:form-field--different'],
