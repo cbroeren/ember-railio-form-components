@@ -36,8 +36,8 @@ export default Ember.Component.extend({
   actions: {
     changed(date) {
       const datetime = get(this, 'value');
-      const time = isDate(datetime) && toTimeString(datetime);
-      const newDate = new Date(`${date} ${time}`);
+      const time     = isDate(datetime) ? toTimeString(datetime) : '00:00';
+      const newDate  = new Date(`${date} ${time}`);
 
       if (typeof this.attrs.updated === 'function') {
         this.attrs.updated(newDate);
